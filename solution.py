@@ -1,5 +1,3 @@
-from cmath import sqrt
-
 import numpy as np
 from scipy.stats import norm
 
@@ -8,7 +6,6 @@ SIGMA = 0.011
 
 
 def solution(p: float, x: np.array) -> tuple:
-    alpha = 1 - p
     x -= SIGMA
-    return x.mean() - np.sqrt(np.var(x)) * norm.ppf(alpha / 2) / np.sqrt(len(x)) + SIGMA, \
-           x.mean() - np.sqrt(np.var(x)) * norm.ppf(p / 2) / np.sqrt(len(x)) + SIGMA
+    return (2 * x.mean() + 2 * np.sqrt(np.var(x)) * norm.ppf(p / 2) / np.sqrt(len(x))) + SIGMA, \
+           (2 * x.mean() + 2 * np.sqrt(np.var(x)) * norm.ppf(1 - p / 2) / np.sqrt(len(x))) + SIGMA
